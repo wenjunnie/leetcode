@@ -1,0 +1,68 @@
+国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如: "a" 对应 ".-", "b" 对应 "-...", "c" 对应 "-.-.", 等等。
+为了方便，所有26个英文字母对应摩尔斯密码表如下：
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+给定一个单词列表，每个单词可以写成每个字母对应摩尔斯密码的组合。例如，"cab" 可以写成 "-.-..--..."，(即 "-.-." + "-..." + ".-"字符串的结合)。我们将这样一个连接过程称作单词翻译。
+返回我们可以获得所有词不同单词翻译的数量。
+
+例如:
+输入: words = ["gin", "zen", "gig", "msg"]
+输出: 2
+解释: 
+各单词翻译如下:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+
+共有 2 种不同翻译, "--...-." 和 "--...--.".
+ 
+注意:
+    单词列表words 的长度不会超过 100。
+    每个单词 words[i]的长度范围为 [1, 12]。
+    每个单词 words[i]只包含小写字母。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/unique-morse-code-words
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] morse = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        List<String> list = new ArrayList<>();
+        Set<String> set = new HashSet<>();
+        for(int i = 0; i < words.length; i++) {
+            StringBuilder builder = new StringBuilder();
+            String str = words[i];
+            for(int j = 0; j < str.length(); j++) {
+                if(str.charAt(j)=='a') builder.append(morse[0]);
+                if(str.charAt(j)=='b') builder.append(morse[1]);
+                if(str.charAt(j)=='c') builder.append(morse[2]);
+                if(str.charAt(j)=='d') builder.append(morse[3]);
+                if(str.charAt(j)=='e') builder.append(morse[4]);
+                if(str.charAt(j)=='f') builder.append(morse[5]);
+                if(str.charAt(j)=='g') builder.append(morse[6]);
+                if(str.charAt(j)=='h') builder.append(morse[7]);
+                if(str.charAt(j)=='i') builder.append(morse[8]);
+                if(str.charAt(j)=='j') builder.append(morse[9]);
+                if(str.charAt(j)=='k') builder.append(morse[10]);
+                if(str.charAt(j)=='l') builder.append(morse[11]);
+                if(str.charAt(j)=='m') builder.append(morse[12]);
+                if(str.charAt(j)=='n') builder.append(morse[13]);
+                if(str.charAt(j)=='o') builder.append(morse[14]);
+                if(str.charAt(j)=='p') builder.append(morse[15]);
+                if(str.charAt(j)=='q') builder.append(morse[16]);
+                if(str.charAt(j)=='r') builder.append(morse[17]);
+                if(str.charAt(j)=='s') builder.append(morse[18]);
+                if(str.charAt(j)=='t') builder.append(morse[19]);
+                if(str.charAt(j)=='u') builder.append(morse[20]);
+                if(str.charAt(j)=='v') builder.append(morse[21]);
+                if(str.charAt(j)=='w') builder.append(morse[22]);
+                if(str.charAt(j)=='x') builder.append(morse[23]);
+                if(str.charAt(j)=='y') builder.append(morse[24]);
+                if(str.charAt(j)=='z') builder.append(morse[25]);
+            }
+            set.add(builder.toString());
+        }
+        return set.size();    
+    }
+}
