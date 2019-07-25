@@ -19,7 +19,7 @@ class Solution {
         char[] chars2 = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
         char[] chars3 = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
         List<String> list = new ArrayList<>();
-        String[] resutl = new String[list.size()];
+        String[] result = new String[list.size()];
         for (int i = 0; i < words.length; i++) {
             int num1 = 0,num2 = 0, num3 = 0;
             for (int j = 0; j < words[i].length(); j++) {
@@ -46,6 +46,6 @@ class Solution {
                 }
             }
         }
-        return list.toArray(resutl);
+        return list.toArray(result);
     }
 }
