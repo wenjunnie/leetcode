@@ -1,0 +1,61 @@
+给定一个Excel表格中的列名称，返回其相应的列序号。
+例如，
+    A -> 1
+    B -> 2
+    C -> 3
+    ...
+    Z -> 26
+    AA -> 27
+    AB -> 28 
+    ...
+
+示例 1:
+输入: "A"
+输出: 1
+
+示例 2:
+输入: "AB"
+输出: 28
+
+示例 3:
+输入: "ZY"
+输出: 701
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/excel-sheet-column-number
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    public int titleToNumber(String s) {
+        int x = s.length(), sum = 0;
+        for(int i = s.length()-1; i >= 0; i--) {
+            if(s.charAt(i) == 'A') sum += 1*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'B') sum += 2*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'C') sum += 3*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'D') sum += 4*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'E') sum += 5*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'F') sum += 6*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'G') sum += 7*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'H') sum += 8*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'I') sum += 9*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'J') sum += 10*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'K') sum += 11*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'L') sum += 12*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'M') sum += 13*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'N') sum += 14*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'O') sum += 15*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'P') sum += 16*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'Q') sum += 17*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'R') sum += 18*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'S') sum += 19*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'T') sum += 20*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'U') sum += 21*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'V') sum += 22*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'W') sum += 23*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'X') sum += 24*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'Y') sum += 25*Math.pow(26,x-i-1);
+            if(s.charAt(i) == 'Z') sum += 26*Math.pow(26,x-i-1);
+        }
+        return sum;
+    }
+}
