@@ -1,0 +1,41 @@
+给定一个没有重复数字的序列，返回其所有可能的全排列。
+
+示例:
+输入: [1,2,3]
+输出:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/permutations
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    List<List<Integer>> list1 = new ArrayList<>();
+    List<Integer> list2 = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        if(nums.length == 0) return list1;
+        List<Integer> list3 = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        BFS(list3);
+        return list1;
+    }
+
+    public void BFS(List<Integer> list) {
+        if(list.size() == 0) {
+            list1.add(new ArrayList<Integer>(list2));
+        }
+        for(int i = 0; i < list.size(); i++) {
+            list2.add(list.get(i));
+            List<Integer> list3 = new ArrayList<>(list);
+            list3.remove(i);
+            BFS(list3);
+            list2.remove(list2.size()-1);
+        }
+    }
+}
