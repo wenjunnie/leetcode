@@ -1,0 +1,57 @@
+给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字母的最小子串。
+
+示例：
+输入: S = "ADOBECODEBANC", T = "ABC"
+输出: "BANC"
+
+说明：
+    如果 S 中不存这样的子串，则返回空字符串 ""。
+    如果 S 中存在这样的子串，我们保证它是唯一的答案。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/minimum-window-substring
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length() == 0 || t.length() == 0) return "";
+        HashMap<Character,Integer> numsT = new HashMap<>();
+        for(int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            if(!numsT.containsKey(c)) numsT.put(c,1);
+            else numsT.put(c,numsT.get(c) + 1);
+        }
+
+        int soul = 0, left = 0, right = 0;
+        int[] arr = {-1,0,0};
+
+        HashMap<Character,Integer> numsWindow = new HashMap<>();
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            if(numsT.containsKey(c)) {
+                if(!numsWindow.containsKey(c)) numsWindow.put(c,1);
+                else numsWindow.put(c,numsWindow.get(c) + 1);
+            }
+            if(numsT.containsKey(c) && numsT.get(c).intValue() == numsWindow.get(c).intValue()) {//Integer范围[-128,127]
+                soul++;
+            }
+            while (soul == numsT.size() && left <= right) {
+                char d = s.charAt(left);
+                if(arr[0] == -1 || right-left+1 < arr[0]) {
+                    arr[0] = right-left+1;
+                    arr[1] = left;
+                    arr[2] = right;
+                }
+                if(numsT.containsKey(d)) {
+                    numsWindow.put(d,numsWindow.get(d)-1);
+                }
+                if(numsT.containsKey(d) && numsT.get(d) > numsWindow.get(d)) {
+                    soul--;
+                }
+                left++;
+            }
+            right++;
+        }
+        return arr[0] == -1 ? "" : s.substring(arr[1],arr[2]+1);
+    }
+}
