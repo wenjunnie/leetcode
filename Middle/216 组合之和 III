@@ -15,3 +15,27 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/combination-sum-iii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    List<List<Integer>> list14 = new ArrayList<>();
+    List<Integer> list15 = new ArrayList<>();
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        if (k == 0) return list14;
+        getCombination(k,n,0,1);
+        return list14;
+    }
+
+    public void getCombination(int k, int n, int sumCom, int start) {
+        if (sumCom == n && list15.size() == k) {
+            list14.add(new ArrayList<>(list15));
+            return;
+        }
+        if (sumCom > n || list15.size() > k) return;
+        for (int i = start; i < 10; i++) {
+            if (n - sumCom < i) return;
+            list15.add(i);
+            getCombination(k, n, sumCom + i, i+1);
+            list15.remove(list15.size() - 1);
+        }
+    }
+}
