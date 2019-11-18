@@ -1,0 +1,71 @@
+n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+上图为 8 皇后问题的一种解法。
+给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。
+每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+
+示例:
+输入: 4
+输出: [
+ [".Q..",  // 解法 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // 解法 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+解释: 4 皇后问题存在两个不同的解法。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/n-queens
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+class Solution {
+    List<List<String>> list17 = new ArrayList<>();
+    boolean[] col, dia1, dia2;
+    public List<List<String>> solveNQueens(int n) {
+        if (n == 0) return list17;
+        col = new boolean[n];
+        dia1 = new boolean[2*n-1];
+        dia2 = new boolean[2*n-1];
+        putQueens(n,0,new ArrayList<>());
+        return list17;
+    }
+
+    public void putQueens(int n, int index, List<Integer> list) {
+        if (index == n) {
+            list17.add(new ArrayList<>(changeList(list,n)));
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            if (!col[i] && !dia1[index+i] && !dia2[index-i+n-1]) {
+                col[i] = true;
+                dia1[index+i] = true;
+                dia2[index-i+n-1] = true;
+                list.add(i);
+                putQueens(n,index+1,list);
+                col[i] = false;
+                dia1[index+i] = false;
+                dia2[index-i+n-1] = false;
+                list.remove(list.size()-1);
+            }
+        }
+    }
+
+    public List<String> changeList(List<Integer> list, int n) {
+        List<String> list2 = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            builder.append(".");
+        }
+        for (int i = 0; i < list.size(); i++) {
+            int tmp = list.get(i);
+            builder.setCharAt(tmp,'Q');
+            list2.add(builder.toString());
+            builder.setCharAt(tmp,'.');
+        }
+        return list2;
+    }
+} 
