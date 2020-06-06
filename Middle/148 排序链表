@@ -1,0 +1,67 @@
+在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+
+示例 1:
+
+输入: 4->2->1->3
+输出: 1->2->3->4
+示例 2:
+
+输入: -1->5->3->4->0
+输出: -1->0->3->4->5
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/sort-list
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        return head == null ? null : mergeSort(head);
+    }
+
+    public ListNode mergeSort(ListNode head) {
+        if (head.next == null) return head;
+        ListNode p = head, q = head, pre = null;
+        while (q != null && q.next != null) {
+            pre = p;
+            p = p.next;
+            q = q.next.next;
+        }
+        pre.next = null;
+        ListNode l = mergeSort(head);
+        ListNode r = mergeSort(p);
+        
+        return merge(l,r);
+    }
+
+    public ListNode merge(ListNode l, ListNode r) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        while (l != null && r != null) {
+            if (l.val <= r.val) {
+                dummy.next = l;
+                dummy = dummy.next;
+                l = l.next;
+            } else {
+                dummy.next = r;
+                dummy = dummy.next;
+                r = r.next;
+            }
+        }
+        if (l != null) {
+            dummy.next = l;
+        }
+        if (r != null) {
+            dummy.next = r;
+        }
+        
+        return cur.next;
+    }
+}
